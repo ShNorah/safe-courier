@@ -1,47 +1,24 @@
-import React, {useEffect} from 'react';
-import {Container, AppBar, Typography, Grow, Grid} from '@material-ui/core'
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {Container} from '@material-ui/core';
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+import Auth from './components/Auth/Auth';
+import Quote from './components/Quote/Quote';
+import Footer from './components/Footer/Footer';
 
-import { useDispatch } from 'react-redux'; //allows us to dispacth an action
-
-import Parcels from './components/Parcels/Parcels';
-import Form from './components/Form/Form';
-import couriers from './images/safecourier.png';
-import useStyles from './styles'
-
-import { getParcels} from './actions/parcels'; //import actions
-
-const App =()=>{
-    const classes = useStyles();
-
-    const dispatch = useDispatch();
-
-    useEffect(()=>{
-        dispatch(getParcels());
-    }, [dispatch]);
-
-    return(
-        <Container maxwidth="lg">
-            <AppBar className={classes.appBar} position="static" color="inherit">
-                <Typography variant="h2" align="center">
-                    <img className={classes.image} src={couriers} alt="safecourier" height="60"/>
-                    
-                </Typography>
-            </AppBar>
-            <Grow in>
-                <Container>
-                    <Grid container justify="space-between" alignItems="stretch" spacing={3}>
-                        <Grid item xs={12} sm={7}>
-                            <Parcels/>
-                        </Grid>
-                        <Grid item xs={12} sm={7}>
-                            <Form/>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </Grow>
-
-        </Container>
-    )
-}
+const App = () => (
+    <Router>
+      <Container maxWidth="lg">
+        <Navbar />
+        <Switch>
+        <Route path="/quote" exact component={Quote} />
+          <Route path="/" exact component={Home} />
+          <Route path="/auth" exact component={Auth} />
+        </Switch>
+        <Footer/>
+      </Container>
+    </Router>
+  );
 
 export default App;

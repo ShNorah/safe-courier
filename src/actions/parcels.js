@@ -1,3 +1,5 @@
+import { FETCH_ALL, CREATE, DELETE, UPDATE  } from '../constants/actionTypes';
+
 import * as api from '../api';
 
 //ction creators, fns that return actions
@@ -7,7 +9,7 @@ import * as api from '../api';
 export const getParcels = () => async (dispatch) =>{
     try{
         const {data} = await api.fetchParcels()
-        dispatch({type: 'FETCH_ALL', paylaod: data});
+        dispatch({type: FETCH_ALL, paylaod: data});
 
     }catch(error){
         console.log(error.message)
@@ -15,14 +17,37 @@ export const getParcels = () => async (dispatch) =>{
    
 }
 
-
-
 export const createParcel = (parcel)=> async (dispatch)=> {
     try{
         const {data}= await api.createParcel(parcel);
-        dispatch({type: 'CREATE', paylaod: data});
+        console.log(data)
+        dispatch({type: CREATE, paylaod: [data]});
 
     }catch(error){
         console.log(error)
+    }
+}
+
+export const deleteParcel = (id) => async(dispatch) =>{
+    try{
+
+        await api.createParcel(id);
+        dispatch({type: DELETE, paylaod: id})
+
+    }catch(error){
+        console.log(error);
+        
+    }
+} 
+
+export const updateParcel =(id, parcel) =>async(dispatch) => {
+    try{
+
+        const {data} = await api.updateParcel(id, parcel);
+        dispatch({type: UPDATE, paylaod: data});
+
+    }catch(error){
+        console.log(error);
+
     }
 }

@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import useStyles from './styles'
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 
-//import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
 
 import {createParcel} from '../../actions/parcels';
@@ -11,7 +10,7 @@ import {createParcel} from '../../actions/parcels';
 
 const Form = ()=>{
     const [parcelData, setparcelData] = useState({
-        parcelCode: '', parcelWeight: '', parcelDestination: '', parcelStatus: '', creator: ''
+        parcelCode: '', parcelWeight: '', parcelDestination: '', currentLocation: '', creator: '', description: ''
     })
     const classes = useStyles();
 
@@ -19,7 +18,7 @@ const Form = ()=>{
 
     const handleSubmit = (e)=>{
         e.preventDefault(); //not to get a refresh in the browser
-        dispatch (createParcel(parcelData));
+        dispatch (createParcel(parcelData));  //pass all the data from our state
 
     }
     const clear = () =>{
@@ -28,33 +27,43 @@ const Form = ()=>{
     return(
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate  className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant="h6"> Creating parcel oders </Typography>
+                <Typography variant="h6"> Create Parcel Delivery oders </Typography>
 
                 <TextField 
                  name ="creator" variant="outlined" label ="Creator" fullWidth value ={parcelData.creator}
                 onChange={(e)=> setparcelData({...parcelData, creator: e.target.value})}>                   
                 </TextField>
                 <TextField 
-                name ="parcelCode" variant="outlined" label ="parcelCode" fullWidth value ={parcelData.creator}
-                onChange={(e)=> setparcelData({...parcelData, creator: e.target.value})}>                   
+                name ="parcelCode" variant="outlined" label ="parcelCode" fullWidth value ={parcelData.parcelCode}
+                onChange={(e)=> setparcelData({...parcelData, parcelCode: e.target.value})}>                   
                 </TextField>
                 <TextField 
-                name ="parcelWeight" variant="outlined" label ="parcelWeight" fullWidth value ={parcelData.creator}
-                onChange={(e)=> setparcelData({...parcelData, creator: e.target.value})}>                   
+                name ="parcelWeight" variant="outlined" label ="parcelWeight" fullWidth value ={parcelData.parcelWeight}
+                onChange={(e)=> setparcelData({...parcelData, parcelWeight: e.target.value})}>                   
                 </TextField>
                 <TextField 
-                name ="parcelDestination" variant="outlined" label ="parcelDestination" fullWidth value ={parcelData.creator}
+                name ="description" variant="outlined" label ="description" fullWidth value ={parcelData.description}
+                onChange={(e)=> setparcelData({...parcelData, description: e.target.value})}>                   
+                </TextField>
+                
+                <div>
+                <TextField 
+                 required
+                 id="outlined-required"
+                 label="From"
+                name ="currentLocation" variant="outlined" value ={parcelData.currentLocation}
+                onChange={(e)=> setparcelData({...parcelData, currentLocation: e.target.value})}>                   
+                </TextField> 
+
+                <TextField 
+                required
+                id="outlined-required"
+                label="To"
+                name ="parcelDestination" variant="outlined" value ={parcelData.parcelDestination}
                 onChange={(e)=> setparcelData({...parcelData, parcelDestination: e.target.value})}>                   
                 </TextField>
-                <TextField 
-                name ="parcelStatus" variant="outlined" label ="parcelStatus" fullWidth value ={parcelData.creator}
-                onChange={(e)=> setparcelData({...parcelData, parcelStatus: e.target.value})}>                   
-                </TextField>
-
-                {/* 
-                 <div className ={classes.fileInput}><FileBase type ="file" multiple = {false} onDone ={(base64)=> setparcelData({...parcelData, selectedFile: base64})}/></div>
-                */}
-
+                </div>
+         
                 <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit Order</Button> 
                 <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>    
             </form>

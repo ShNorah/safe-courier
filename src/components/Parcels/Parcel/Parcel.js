@@ -1,6 +1,6 @@
 import React from 'react';
 import useStyles from './styles'
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -10,7 +10,6 @@ const Parcel = ({parcel})=>{
     const classes = useStyles();
     return(
           <Card className={classes.card}>
-              <CardMedia className={classes.media} image={'https://images.pexels.com/photos/4246238/pexels-photo-4246238.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'} title={parcel.title} />
               <div className={classes.overlay}>
                   <Typography variant="h6">{parcel.creator}</Typography>
                   <Typography variant="body2">{moment(parcel.createdAt).fromNow()}</Typography>

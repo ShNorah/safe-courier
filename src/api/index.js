@@ -1,15 +1,25 @@
 import axios from 'axios';
 
-// const url = "http://localhost:5000/parcels";
+const API = axios.create({ baseURL: 'https://safe-courier-backend.herokuapp.com'})
 
-const url = "https://safe-courier-backend.herokuapp.com/parcels";
+API.interceptors.request.use((req) => {
+    if(localStorage.getItem('profile')){
+        req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+    }
+    return req;
 
-export const fetchParcels = ()=> axios.get(url);
+});
 
-export const createParcel = (newParcel) => axios.post(url, newParcel);
+export const fetchParcels = ()=> API.get('/parcels');
 
-export const deleteParcel = (id) => axios.delete(`${url}/${id}`);
+export const createParcel = (newParcel) => API.post('/parcels', newParcel);
 
-export const updateParcel = (id, updatedParcel) => axios.patch(`${url}/${id},`, updatedParcel);
+export const deleteParcel = (id) => API.delete(`/parcels/${id}`);
+
+export const updateParcel = (id, updatedParcel) => API.patch(`/parcels/${id},`, updatedParcel);
+
+//auth routes
+export const signIn = (formData) => API.post('/users/auth/signin', formData);
+export const signUp = (formData) => API.post('/users/auth/signup', formData);
 
 

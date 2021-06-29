@@ -2,7 +2,7 @@ import { FETCH_ALL, CREATE, DELETE, UPDATE  } from '../constants/actionTypes';
 
 import * as api from '../api';
 
-//ction creators, fns that return actions
+//action creators, fns that return actions
 //an action is an object that has a type and a payload
 //data represents our parcels
 
@@ -31,7 +31,7 @@ export const createParcel = (parcel)=> async (dispatch)=> {
 export const deleteParcel = (id) => async(dispatch) =>{
     try{
 
-        await api.createParcel(id);
+        await api.deleteParcel(id);
         dispatch({type: DELETE, paylaod: id})
 
     }catch(error){

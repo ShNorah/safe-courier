@@ -11,7 +11,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import DeleteIcon from '@material-ui/icons/Delete';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 import * as api from '../../api/index'
 
@@ -115,7 +114,6 @@ console.log(parcels);
                     <Button size="small" color="secondary" onClick={() => dispatch(deleteParcel(card._id))}>
                       <DeleteIcon fontSize="small" /> Delete
                       </Button>
-                      <Button style={{ color: 'primary' }} size="small" onClick={() => {}}><MoreHorizIcon fontSize="default" /></Button>
                   </CardActions>
                 </Card>
               </Grid>

@@ -10,7 +10,7 @@ import {createParcel} from '../../actions/parcels';
 
 const Form = ()=>{
     const [parcelData, setparcelData] = useState({
-        parcelCode: '', parcelWeight: '', parcelDestination: '', currentLocation: '', creator: '', description: ''
+        parcelCode: '', parcelWeight: '', parcelDestination: '', currentLocation: '', parcelStatus: '', description: ''
     })
     const classes = useStyles();
 
@@ -28,17 +28,12 @@ const Form = ()=>{
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate  className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6"> Create Parcel Delivery oders </Typography>
-
-                <TextField 
-                 name ="creator" variant="outlined" label ="Creator" fullWidth value ={parcelData.creator}
-                onChange={(e)=> setparcelData({...parcelData, creator: e.target.value})}>                   
-                </TextField>
                 <TextField 
                 name ="parcelCode" variant="outlined" label ="parcelCode" fullWidth value ={parcelData.parcelCode}
                 onChange={(e)=> setparcelData({...parcelData, parcelCode: e.target.value})}>                   
                 </TextField>
                 <TextField 
-                name ="parcelWeight" variant="outlined" label ="parcelWeight" fullWidth value ={parcelData.parcelWeight}
+                name ="parcelWeight" variant="outlined" label ="parcelWeight(kg)" fullWidth value ={parcelData.parcelWeight}
                 onChange={(e)=> setparcelData({...parcelData, parcelWeight: e.target.value})}>                   
                 </TextField>
                 <TextField 

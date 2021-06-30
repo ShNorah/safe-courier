@@ -4,7 +4,7 @@ export const parcels = (parcels =[], action) =>{  //initial state is an empty ar
 
     switch (action.type) {
         case FETCH_ALL:
-            return action.payload;   //payload is actually our parcels
+            return [...parcels,action.payload];  //payload is actually our parcels
 
         case CREATE:
             return [...parcels, action.payload];
